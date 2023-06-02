@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gofoods/auth%20Respository/auth%20repository.dart';
 import 'package:gofoods/constants/utils.dart';
 import 'package:gofoods/custtomscreens/custtombutton.dart';
 import 'package:gofoods/custtomscreens/textfild.dart';
@@ -24,6 +25,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final AuthMethods _authMethods=AuthMethods();
+
 
   bool isChecked = false;
   bool isLoading = false;
@@ -282,8 +285,13 @@ class _PhoneNumberState extends State<PhoneNumber> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                authbutton(Colors.grey.shade300, Colors.black,
-                    LanguageEn.google, width / 1.1, "assets/google.png"),
+                ElevatedButton(
+                  onPressed: () async {
+                    bool res =await _authMethods.signInWithGoogle(context);
+                  },
+                  child: authbutton(Colors.grey.shade300, Colors.black,
+                      LanguageEn.google, width / 1.1, "assets/google.png"),
+                ),
               ],
             ),
 
@@ -387,32 +395,34 @@ class _PhoneNumberState extends State<PhoneNumber> {
   // }
 
   Widget authbutton(buttoncolor, buttontextcolor, txt, w, image) {
-    return Container(
-      height: height / 14,
-      width: w,
-      decoration: BoxDecoration(
-        color: buttoncolor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
+    return GestureDetector(
+      child: Container(
+        height: height / 14,
+        width: w,
+        decoration: BoxDecoration(
+          color: buttoncolor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
         ),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              image,
-              height: height / 30,
-            ),
-            SizedBox(width: width / 30),
-            Text(
-              txt,
-              style: TextStyle(
-                  color: buttontextcolor,
-                  fontSize: height / 50,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                image,
+                height: height / 30,
+              ),
+              SizedBox(width: width / 30),
+              Text(
+                txt,
+                style: TextStyle(
+                    color: buttontextcolor,
+                    fontSize: height / 50,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );

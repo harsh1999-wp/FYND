@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "390884061029",
+    "project_id": "cube2nd",
+    "storage_bucket": "cube2nd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390884061029:android:b7d317087ce37796c0fb8c",
+        "android_client_info": {
+          "package_name": "com.example.gofoods"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390884061029-4jk4qibc5ljh0lf04bo8miva24fg7bd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACxi_DzLnN-w35LjDc5WetVeLM2DAdT6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390884061029-4jk4qibc5ljh0lf04bo8miva24fg7bd0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "390884061029-0nguclm1vlbu3ppqv068vhdh73gfa55j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gofoods"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

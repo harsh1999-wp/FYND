@@ -85,8 +85,12 @@ class _SelectLoginState extends State<SelectLogin> {
                   conectiontype(const Color(0xff3c599a), Icons.facebook,
                       "Connect With Facebook"),
                   SizedBox(height: height / 80),
-                  conectiontype(const Color(0xff518df9), Icons.g_mobiledata,
-                      "Connect With Google"),
+                  TextButton(onPressed:(){
+
+                  },
+                    child: conectiontype(const Color(0xff518df9), Icons.g_mobiledata,
+                        "Connect With Google"),
+                  ),
                 ],
               ),
             )
