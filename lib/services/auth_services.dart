@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class AuthServices {
-  void signUpUser({
+  Future<void> signUpUser({
     required BuildContext context,
     required String email,
     required String password,
@@ -24,7 +24,7 @@ class AuthServices {
           email: email,
           password: password,
           address: '',
-          type: '',
+          role: 'user',
           token: '',
           phoneNo: phoneNo);
 
@@ -34,6 +34,8 @@ class AuthServices {
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
+
+      print(res.body);
 
       httpErrorHandle(
           response: res,
@@ -57,25 +59,28 @@ class AuthServices {
     required String password,
   }) async {
     try {
-      http.Response res = await http.post(Uri.parse('${Const.apiV1Url}/login'),
+      http.Response res = await http.post(
+          Uri.parse('${Const.apiV1Url}/consumer/login'),
           body: jsonEncode({
-            'email': email,
+            'phoneNumber': email,
             'password': password,
           }),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           });
 
+      print(res.body);
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => BottomHome(),
-                ),
-                (route) => false);
-          });
+        response: res,
+        context: context,
+        onSuccess: () {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => BottomHome(),
+              ),
+              (route) => false);
+        },
+      );
     } catch (e) {
       showSnackBar(e.toString());
     }

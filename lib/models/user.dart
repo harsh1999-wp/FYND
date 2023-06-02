@@ -7,19 +7,19 @@ class User {
   final String phoneNo;
   final String password;
   final String address;
-  final String type;
+  final String role;
   final String token;
 
-  User(
-      {required this.id,
-        required this.name,
-        required this.email,
-        required this.phoneNo,
-        required this.password,
-        required this.address,
-        required this.type,
-        required this.token,
-        });
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.phoneNo,
+    required this.password,
+    required this.address,
+    required this.role,
+    required this.token,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,7 +29,7 @@ class User {
       'phoneNo': phoneNo,
       'password': password,
       'address': address,
-      'type': type,
+      'role': role,
       'token': token,
     };
   }
@@ -42,7 +42,7 @@ class User {
       phoneNo: map['phoneNo'] ?? '',
       password: map['password'] ?? '',
       address: map['address'] ?? '',
-      type: map['type'] ?? '',
+      role: map['role'] ?? '',
       token: map['token'] ?? '',
     );
   }
@@ -58,7 +58,7 @@ class User {
     String? phoneNo,
     String? password,
     String? address,
-    String? type,
+    String? role,
     String? token,
     List<dynamic>? cart,
   }) {
@@ -69,7 +69,7 @@ class User {
       phoneNo: phoneNo ?? this.phoneNo,
       password: password ?? this.password,
       address: address ?? this.address,
-      type: type ?? this.type,
+      role: role ?? this.role,
       token: token ?? this.token,
     );
   }

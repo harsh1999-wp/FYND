@@ -56,7 +56,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
   void signIn() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    if (email.isEmpty || !email.contains('@')) {
+    if (email.isEmpty) {
       showSnackBar('Invalid email');
       return;
     } else if (password.isEmpty) {
@@ -282,7 +282,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                authbutton(Color.fromARGB(255, 64, 65, 66), Colors.white,
+                authbutton(Colors.grey.shade300, Colors.black,
                     LanguageEn.google, width / 1.1, "assets/google.png"),
               ],
             ),

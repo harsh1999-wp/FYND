@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gofoods/constants/utils.dart';
 import 'package:gofoods/custtomscreens/custtombutton.dart';
 import 'package:gofoods/custtomscreens/textfild.dart';
-import 'package:gofoods/screens/bottombar/bottombar.dart';
 import 'package:gofoods/services/auth_services.dart';
 import 'package:gofoods/utils/enstring.dart';
 import 'package:gofoods/utils/mediaqury.dart';
@@ -27,6 +27,7 @@ class _CreateAccountState extends State<CreateAccount> {
   final authServices = AuthServices();
 
   bool isChecked = false;
+  bool isLoading = false;
 
   getdarkmodepreviousstate() async {
     final prefs = await SharedPreferences.getInstance();
@@ -54,13 +55,41 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   void signUp() {
-    authServices.signUpUser(
-      name: nameController.text.trim(),
-      email: emailController.text.trim(),
-      phoneNo: phoneController.text.trim(),
-      password: passwordController.text.trim(),
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final phoneNo = phoneController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (name.isEmpty) {
+      showSnackBar('Invalid name');
+      return;
+    } else if (email.isEmpty || !email.contains('@')) {
+      showSnackBar('Invalid Email');
+      return;
+    } else if (phoneNo.isEmpty) {
+      showSnackBar('Invalid phone number');
+      return;
+    } else if (password.isEmpty || password.length < 8) {
+      showSnackBar('Password is too short.');
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+    authServices
+        .signUpUser(
+      name: name,
+      email: email,
+      phoneNo: phoneNo,
+      password: password,
       context: context,
-    );
+    )
+        .then((value) {
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
   @override
@@ -205,15 +234,16 @@ class _CreateAccountState extends State<CreateAccount> {
             SizedBox(height: height / 15),
             GestureDetector(
               onTap: () {
-
                 signUp();
               },
-              child: button(
-                notifier.getred,
-                notifier.getwhite,
-                LanguageEn.createaccount,
-                width / 1.1,
-              ),
+              child: isLoading
+                  ? CircularProgressIndicator()
+                  : button(
+                      notifier.getred,
+                      notifier.getwhite,
+                      LanguageEn.createaccount,
+                      width / 1.1,
+                    ),
             ),
             SizedBox(height: height / 50),
             Row(
